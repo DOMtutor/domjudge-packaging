@@ -44,18 +44,27 @@ section_start "Variables"
 VERSION="$1"
 NAMESPACE="${2-domjudge}"
 URL="${3-https://www.domjudge.org/releases/domjudge-${VERSION}.tar.gz}"
+DOWNLOAD="domjudge-${VERSION}.tar.gz"
 FILE=domjudge.tar.gz
 section_end
 
 section_start "Download DOMjudge tarball"
-echo "[..] Downloading DOMjudge version ${VERSION}..."
-if ! wget --quiet "${URL}" -O ${FILE}
+if [ -e "$DOWNLOAD" ]
 then
-	echo "[!!] DOMjudge version ${VERSION} file not found on https://www.domjudge.org/releases"
-	exit 1
+	echo "[..] Using cached download"
+else
+	echo "[..] Downloading DOMjudge version ${VERSION}..."
+	if ! wget --quiet "${URL}" -O "$DOWNLOAD"
+	then
+		echo "[!!] DOMjudge version ${VERSION} file not found on https://www.domjudge.org/releases"
+		exit 1
+	fi
+	echo "[ok] DOMjudge version ${VERSION} downloaded as domjudge.tar.gz"; echo
 fi
-echo "[ok] DOMjudge version ${VERSION} downloaded as domjudge.tar.gz"; echo
 section_end
+
+rm -f "$FILE"
+ln -s "$DOWNLOAD" "$FILE"
 
 section_start "Build domserver container"
 echo "[..] Building Docker image for domserver..."

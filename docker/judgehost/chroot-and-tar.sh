@@ -3,7 +3,8 @@
 set -euo pipefail
 
 # Usage: https://github.com/DOMjudge/domjudge/blob/main/misc-tools/dj_make_chroot.in#L58-L87
-/opt/domjudge/judgehost/bin/dj_make_chroot
+# Add packages with -i "<apt package name>" here
+/opt/domjudge/judgehost/bin/dj_make_chroot -D Debian -R stable -i pypy3,nodejs
 
 cd /
 echo "[..] Compressing chroot"

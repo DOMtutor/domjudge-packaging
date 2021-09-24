@@ -20,7 +20,7 @@ RUN apt-get update \
 	acl lsof zip unzip supervisor sudo procps libcgroup2 \
 	php-cli php-zip php-gd php-curl php-mysql php-json \
 	php-gmp php-xml php-mbstring python3 \
-	gcc g++ default-jre-headless default-jdk-headless ghc fp-compiler \
+	gcc g++ default-jre-headless default-jdk-headless pypy3 ghc rustc nodejs fp-compiler \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Add chroot and judgehost data
@@ -45,7 +45,7 @@ ENV PATH="$PATH:/opt/domjudge/judgehost/bin"
 
 # Run customizations
 COPY judgehost/configure.sh /configure.sh
-RUN chmod 700 /configure.sh && /configure.sh && rm -f /configure.sh
+RUN chmod 700 /configure.sh && /configure.sh && rm -f /configure.sh && rm -f /chroot.tar.gz /judgehost.tar.gz
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD ["/scripts/start.sh"]
