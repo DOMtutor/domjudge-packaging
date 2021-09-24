@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Add packages with -i "<apt package name>" here
-/opt/domjudge/judgehost/bin/dj_make_chroot
+/opt/domjudge/judgehost/bin/dj_make_chroot -i pypy3,julia,nodejs
 
 cd /
 echo "[..] Compressing chroot"
