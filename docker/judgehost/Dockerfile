@@ -17,7 +17,7 @@ RUN apt update \
 	acl zip unzip supervisor sudo procps libcgroup1 \
 	php-cli php-zip php-gd php-curl php-mysql php-json \
 	php-gmp php-xml php-mbstring python3 \
-	gcc g++ default-jre-headless default-jdk ghc fp-compiler \
+	gcc g++ default-jdk-headless pypy3 ghc rustc nodejs fp-compiler \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Add chroot and judgehost data
