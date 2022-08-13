@@ -4,8 +4,8 @@ LABEL org.opencontainers.image.authors="DOMjudge team <team@domjudge.org>"
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install required packages for build of judgehost
-RUN apt update \
-	&& apt install --no-install-recommends --no-install-suggests -y \
+RUN apt-get update \
+	&& apt-get install --no-install-recommends --no-install-suggests -y \
 	autoconf automake git \
 	gcc g++ make zip unzip \
 	php-cli php-zip lsb-release debootstrap \
@@ -20,7 +20,6 @@ RUN apt update \
 RUN useradd -m domjudge
 
 # Install composer
-
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
 	&& php composer-setup.php \
 	&& mv /composer.phar /usr/local/bin/composer

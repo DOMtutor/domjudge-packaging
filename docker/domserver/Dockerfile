@@ -4,15 +4,15 @@ LABEL org.opencontainers.image.authors="DOMjudge team <team@domjudge.org>"
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install required packages for build of domserver
-RUN apt update \
-	&& apt install --no-install-recommends --no-install-suggests -y \
+RUN apt-get update \
+	&& apt-get install --no-install-recommends --no-install-suggests -y \
 	autoconf automake git \
 	gcc g++ make acl zip unzip \
 	php-cli php-zip \
 	php-gd php-curl php-mysql php-json php-intl \
 	php-gmp php-xml php-mbstring \
 	sudo bsdmainutils ntp libcgroup-dev procps \
-	python3-sphinx python3-sphinx-rtd-theme python3-pip fontconfig python3-yaml \
+	python3-pip fontconfig \
 	texlive-latex-recommended texlive-latex-extra \
 	texlive-fonts-recommended texlive-lang-european latexmk \
 	libcurl4-gnutls-dev libjsoncpp-dev libmagic-dev \
@@ -20,7 +20,7 @@ RUN apt update \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Needed for building the docs
-RUN pip3 install pygments rst2pdf
+RUN pip3 install yaml pygments rst2pdf sphinx sphinx-rtd-theme
 
 # Set up user
 RUN useradd -m domjudge
@@ -52,8 +52,8 @@ ENV DEBIAN_FRONTEND=noninteractive \
 	DJ_DB_INSTALL_BARE=0
 
 # Install required packages for running of domserver
-RUN apt update \
-	&& apt install --no-install-recommends --no-install-suggests -y \
+RUN apt-get update \
+	&& apt-get install --no-install-recommends --no-install-suggests -y \
 	acl curl zip unzip supervisor mariadb-client apache2-utils \
 	nginx php-cli php-fpm php-zip \
 	php-gd php-curl php-mysql php-json php-intl \

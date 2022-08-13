@@ -2,7 +2,7 @@
 
 # Usage: https://github.com/DOMjudge/domjudge/blob/main/misc-tools/dj_make_chroot.in#L58-L87
 # Add packages with -i "<apt package name>" here
-/opt/domjudge/judgehost/bin/dj_make_chroot -i julia,nodejs
+/opt/domjudge/judgehost/bin/dj_make_chroot -i g++,default-jdk-headless,pypy3,julia,nodejs,rustc,ghc,fp-compiler
 
 cd /
 echo "[..] Compressing chroot"

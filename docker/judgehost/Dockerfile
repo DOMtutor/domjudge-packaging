@@ -1,4 +1,4 @@
-FROM debian:stable
+FROM debian:stable-slim
 LABEL org.opencontainers.image.authors="DOMjudge team <team@domjudge.org>"
 
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -11,13 +11,13 @@ ENV DEBIAN_FRONTEND=noninteractive \
 	RUN_USER_UID_GID=62860
 
 # Install required packages for running of judgehost
-RUN apt update \
-	&& apt install --no-install-recommends --no-install-suggests -y \
+RUN apt-get update \
+	&& apt-get install --no-install-recommends --no-install-suggests -y \
 	dumb-init \
 	acl zip unzip supervisor sudo procps libcgroup1 \
 	php-cli php-zip php-gd php-curl php-mysql php-json \
-	php-gmp php-xml php-mbstring python3 \
-	gcc g++ default-jdk-headless pypy3 ghc rustc nodejs fp-compiler \
+	php-gmp php-xml php-mbstring \
+	python3 \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Add chroot and judgehost data
