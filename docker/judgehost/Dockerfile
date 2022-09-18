@@ -33,7 +33,7 @@ ENV PATH="$PATH:/opt/domjudge/judgehost/bin"
 
 # Change start script permissions, add user and fix permissions
 COPY judgehost/configure.sh /configure.sh
-RUN chmod 700 /configure.sh && /configure.sh && rm -f /configure.sh
+RUN chmod 700 /configure.sh && /configure.sh && rm -f /configure.sh && rm -f /chroot.tar.gz /judgehost.tar.gz
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD ["/scripts/start.sh"]
