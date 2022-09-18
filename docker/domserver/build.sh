@@ -3,6 +3,9 @@
 cd /domjudge-src/domjudge*
 chown -R domjudge: .
 # If we used a local source tarball, it might not have been built yet
+echo "Update flex"
+sudo -u domjudge composer update symfony/flex --no-plugins -vvv
+echo "Make dist"
 sudo -u domjudge make dist
 sudo -u domjudge ./configure -with-baseurl=http://localhost/
 
