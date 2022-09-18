@@ -6,8 +6,7 @@ then
 	export PS4='(${0}:${LINENO}): - [$?] $ '
 fi
 
-if [ "$#" -ne 1 ]
-then
+if [ "$#" -ne 1 ]; then
 	echo "Usage: $0 domjudge-version"
 	echo "	For example: $0 5.3.0"
 	exit 1
@@ -16,17 +15,25 @@ fi
 VERSION="$1"
 
 URL=https://www.domjudge.org/releases/domjudge-${VERSION}.tar.gz
+DOWNLOAD="domjudge-${VERSION}.tar.gz"
 FILE=domjudge.tar.gz
 
 echo "[..] Downloading DOMjudge version ${VERSION}..."
 
-if ! wget --quiet "${URL}" -O ${FILE}
-then
-	echo "[!!] DOMjudge version ${VERSION} file not found on https://www.domjudge.org/releases"
-	exit 1
+if [ -e "$DOWNLOAD" ]; then
+	echo "[..] Using cached download"
+else
+	echo "[..] Downloading DOMjudge version ${VERSION}..."
+	if ! wget --quiet ${URL} -O "$DOWNLOAD"
+	then
+		echo "[!!] DOMjudge version ${VERSION} file not found on https://www.domjudge.org/releases"
+		exit 1
+	fi
+	echo "[ok] DOMjudge version ${VERSION} downloaded as domjudge.tar.gz"; echo
 fi
 
-echo "[ok] DOMjudge version ${VERSION} downloaded as domjudge.tar.gz"; echo
+rm -f "$FILE"
+ln -s "$DOWNLOAD" "$FILE"
 
 echo "[..] Building Docker image for domserver..."
 ./build-domjudge.sh "domjudge/domserver:${VERSION}"
