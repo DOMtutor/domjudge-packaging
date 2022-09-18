@@ -82,6 +82,8 @@ The following environment variables are supported by the `domserver` container:
 * `MYSQL_DATABASE` (defaults to `domjudge`): set the database to use.
 * `DJ_DB_INSTALL_BARE` (defaults to `0`): set to `1` to do a `bare-install` for the database instead of a normal `install`.
 * `FPM_MAX_CHILDREN` (defaults to `40`): the maximum number of PHP FPM children to spawn.
+* `TRUSTED_PROXIES` (defaults to empty): The IP list of trusted proxy servers, separated by a comma(`,`).
+* `WEBAPP_BASEURL` (defaults to `/`): The Base Url of DOMserver. Such as `/domjudge`, You can access the DOMserver homepage via `http://localhost/domjudge`.
 
 #### Passwords through files
 
@@ -125,6 +127,9 @@ docker exec -it domserver supervisorctl restart [service]
 ```
 
 where `[service]` is one of `nginx` or `php`.
+
+#### Docker-compose
+See https://github.com/DOMjudge/domjudge-packaging/blob/main/docker/docker-compose.yml for a docker-compose example which automates the steps above.
 
 ### Judgehost container
 

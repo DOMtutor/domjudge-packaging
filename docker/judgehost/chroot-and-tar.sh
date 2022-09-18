@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Usage: https://github.com/DOMjudge/domjudge/blob/main/misc-tools/dj_make_chroot.in#L58-L87
 # Add packages with -i "<apt package name>" here
 /opt/domjudge/judgehost/bin/dj_make_chroot -D Debian -R bullseye -i pypy3,julia,nodejs
 
